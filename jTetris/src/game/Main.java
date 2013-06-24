@@ -9,14 +9,16 @@ public class Main {
 	private boolean unstacked=true;
 
 	private Board b=new Board(gameOn,unstacked);
-	private GameInterface gi=new GameInterface();
+	private GameInterface gi=new GameInterface(b.showBoard());
 	
 	public Main(){
 		
-		
-		timer=new Timer(0,new ActionListener() {
+		gi.display();
+		b.spawn();
+		timer=new Timer(1000,new ActionListener() {
 		      public void actionPerformed(ActionEvent evt) {
 		    	  b.move(Direction.DOWN);
+		    	  gi.display();
 		      };}  );
 		
 		
@@ -26,6 +28,7 @@ public class Main {
 		 unstacked=true;
 		 
 		}
+		System.out.println("YOU LOSE");
 		//Endgame
 		
 	}
@@ -39,8 +42,11 @@ public class Main {
 			while(gameOn&&unstacked){
 			Direction input=gi.input();
 			b.move(input);
+			gi.display();
 			}
 		timer.stop();
+		b.clear();
+		gameOn=b.endcheck();
 		}
 		
 		
