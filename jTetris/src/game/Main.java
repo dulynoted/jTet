@@ -14,19 +14,22 @@ public class Main {
 	public Main(){
 		
 		gi.display();
-		b.spawn();
-		timer=new Timer(1000,new ActionListener() {
+	//	b.spawn();
+	/*	timer=new Timer(1000,new ActionListener() {
 		      public void actionPerformed(ActionEvent evt) {
-		    	  b.move(Direction.DOWN);
-		    	  gi.display();
+		  		//System.out.println("LOOK DOWN");
+
+		    	 b.move(Direction.DOWN);
+		    	 gi.display();
 		      };}  );
-		
+		*/
 		
 		while(gameOn){
-		timer.setDelay(1000-(clines/10)*50);
+//	timer.setDelay(1000-(clines/10)*50);
 		 cycle();
 		 unstacked=true;
-		 
+			System.out.println("wut");
+
 		}
 		System.out.println("YOU LOSE");
 		//Endgame
@@ -37,14 +40,28 @@ public class Main {
 	}
 	
 	public void cycle(){
+		System.out.println("cycle");
+		System.out.println("gameon:"+gameOn+" unstacked:"+unstacked);
+
+
 		b.spawn();
-		timer.start();
+	//	timer.start();
+			long ghettoTimer=System.currentTimeMillis();
 			while(gameOn&&unstacked){
+			System.out.println("Still in the cycle loop");
+			System.out.println(System.currentTimeMillis()-ghettoTimer+" and "+(1000-(clines/10)*50));
+			if((System.currentTimeMillis()-ghettoTimer)>(1000-(clines/10)*50)){
+				unstacked=b.move(Direction.DOWN);
+		  	//	System.out.println("LOOK DOWN");
+				ghettoTimer=System.currentTimeMillis();
+			}
 			Direction input=gi.input();
-			b.move(input);
+			unstacked=b.move(input);
 			gi.display();
 			}
-		timer.stop();
+			System.out.println("cleanup");
+
+		//timer.stop();
 		b.clear();
 		gameOn=b.endcheck();
 		}

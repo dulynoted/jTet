@@ -20,40 +20,40 @@ public class Tetromino {
 			tiles[3]=new Tile(p, x+2, y+0);
 			break;
 		case LINE:
-			tiles[0]=new Tile(p, x+0, y+0);
-			tiles[1]=new Tile(p, x+1, y+0);
-			tiles[2]=new Tile(p, x+0, y+1);
-			tiles[3]=new Tile(p, x+1, y+1);
+			tiles[0]=new Tile(p, x+1, y+0);
+			tiles[1]=new Tile(p, x+1, y+1);
+			tiles[2]=new Tile(p, x+1, y+2);
+			tiles[3]=new Tile(p, x+1, y+3);
 			break;
 		case T:
 			tiles[0]=new Tile(p, x+0, y+0);
 			tiles[1]=new Tile(p, x+1, y+0);
-			tiles[2]=new Tile(p, x+0, y+1);
+			tiles[2]=new Tile(p, x+2, y+0);
 			tiles[3]=new Tile(p, x+1, y+1);
 			break;
 		case RS:
 			tiles[0]=new Tile(p, x+0, y+0);
 			tiles[1]=new Tile(p, x+1, y+0);
-			tiles[2]=new Tile(p, x+0, y+1);
-			tiles[3]=new Tile(p, x+1, y+1);
+			tiles[2]=new Tile(p, x+1, y+1);
+			tiles[3]=new Tile(p, x+2, y+1);
 			break;	
 		case LS:
-			tiles[0]=new Tile(p, x+0, y+0);
+			tiles[0]=new Tile(p, x+0, y+1);
 			tiles[1]=new Tile(p, x+1, y+0);
-			tiles[2]=new Tile(p, x+0, y+1);
-			tiles[3]=new Tile(p, x+1, y+1);
+			tiles[2]=new Tile(p, x+1, y+1);
+			tiles[3]=new Tile(p, x+2, y+0);
 			break;
 		case RL:
-			tiles[0]=new Tile(p, x+0, y+0);
-			tiles[1]=new Tile(p, x+1, y+0);
-			tiles[2]=new Tile(p, x+0, y+1);
-			tiles[3]=new Tile(p, x+1, y+1);
+			tiles[0]=new Tile(p, x+2, y+1);
+			tiles[1]=new Tile(p, x+2, y+0);
+			tiles[2]=new Tile(p, x+1, y+2);
+			tiles[3]=new Tile(p, x+2, y+2);
 			break;
 		case LL:
-			tiles[0]=new Tile(p, x+0, y+0);
+			tiles[0]=new Tile(p, x+1, y+1);
 			tiles[1]=new Tile(p, x+1, y+0);
-			tiles[2]=new Tile(p, x+0, y+1);
-			tiles[3]=new Tile(p, x+1, y+1);
+			tiles[2]=new Tile(p, x+1, y+2);
+			tiles[3]=new Tile(p, x+2, y+2);
 			break;
 		}
 	

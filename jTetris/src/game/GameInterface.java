@@ -10,8 +10,10 @@ public class GameInterface {
 
 	static Scanner s = new Scanner(System.in);
 	private Tile[][] grid;
+	
 	public GameInterface(Tile[][] g) {
 		grid=g;
+		
 	}
 
 	public Direction input() {
@@ -29,6 +31,8 @@ public class GameInterface {
 			String line = "|";
 			for (int i = 0; i < 10; i++) {
 				if(grid[i][j]==null)
+					line+="X";
+			else if(grid[i][j].owner==Owner.BLANK)
 					line+=" ";
 				else if(grid[i][j].owner==Owner.GAME)
 					line+="O";
@@ -36,6 +40,7 @@ public class GameInterface {
 					line+="@";
 				else if(grid[i][j].owner==Owner.P2)
 					line+="X";
+				
 				}
 			line+="|";
 
