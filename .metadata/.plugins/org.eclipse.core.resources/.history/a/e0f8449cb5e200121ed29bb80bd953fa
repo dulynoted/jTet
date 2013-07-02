@@ -1,0 +1,173 @@
+package game;
+
+import game.Board.Owner;
+import game.Main.Direction;
+
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.util.*;
+
+import javax.swing.*;
+
+public class GameInterface {
+	private Scanner s = new Scanner(System.in);
+	private Tile[][] grid;
+	private Board b;
+	private JFrame frame = new JFrame();
+	private JPanel board = new JPanel();
+	private JPanel info = new JPanel();
+	private JPanel[][] squares = new JPanel[10][20];
+	
+	public GameInterface(Board b) {
+		this.b = b;
+		grid = b.showBoard();
+		frame.setVisible(true);
+		frame.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		// frame.setSize(800, 600);
+
+		// frame.setResizable(false);
+		frame.add(board);
+		frame.add(info);
+		frame.setTitle("Tetris");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		board.setBackground(java.awt.Color.WHITE);
+		// board.setSize(new Dimension(260, 520));
+		// info.setLocation(261, 0);
+		// info.setSize(new Dimension(150, 520));
+		info.setBackground(java.awt.Color.DARK_GRAY);
+		board.setLayout(null);
+		board.setBackground(java.awt.Color.GRAY);
+		for (int j = 0; j < 20; j++) {
+			for (int i = 0; i < 10; i++) {
+				squares[i][j] = new JPanel();
+				board.add(squares[i][j]);
+				squares[i][j].setLocation(i * 25 + i, j * 25 + j);
+				squares[i][j].setBackground(java.awt.Color.WHITE);
+				squares[i][j].setSize(new Dimension(25, 25));
+			}
+		}
+		info.setPreferredSize(new Dimension(150, 520));
+		board.setPreferredSize(new Dimension(260, 520));
+		frame.pack();
+
+		board.getInputMap().put(KeyStroke.getKeyStroke("SPACE"), "test");
+		board.getActionMap().put("test", new test());
+
+		board.getInputMap().put(KeyStroke.getKeyStroke('d'), "down");
+		board.getActionMap().put("down", new pressedAction("down"));
+		
+		board.getInputMap().put(KeyStroke.getKeyStroke('w'), "up");
+		board.getActionMap().put("up", new pressedAction("up"));
+		
+		board.getInputMap().put(KeyStroke.getKeyStroke('a'), "left");
+		board.getActionMap().put("left", new pressedAction("left"));
+		
+		board.getInputMap().put(KeyStroke.getKeyStroke('d'), "right");
+		board.getActionMap().put("right", new pressedAction("right"));
+		
+		board.getInputMap().put(KeyStroke.getKeyStroke('q'), "ccw");
+		board.getActionMap().put("ccw", new pressedAction("ccw"));
+		
+		board.getInputMap().put(KeyStroke.getKeyStroke('e'), "cw");
+		board.getActionMap().put("cw", new pressedAction("cw"));
+
+
+	}
+	private class test extends AbstractAction{
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			System.out.println("TESTY TESTER TESTS TESTILY");
+		}}
+	
+	@SuppressWarnings("serial")
+	private class pressedAction extends AbstractAction{
+
+		String direction;
+		public pressedAction(String d) {
+			System.out.println("BLAHHRG");
+			direction=d;
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			System.out.println("GRHHALB");
+
+			
+			if(direction=="down")
+				b.move(Direction.DOWN);
+			else if(direction=="left")
+				b.move(Direction.LEFT);
+			else if(direction=="right")
+				b.move(Direction.RIGHT);
+			else if(direction=="up")
+				b.move(Direction.UP);
+			else if(direction=="cw")
+				b.move(Direction.CW);
+			else if(direction=="ccw")
+				b.move(Direction.CCW);
+			else 
+				b.move(Direction.NONE);
+			
+			display();
+		}
+		
+		
+	}
+
+	
+	public Direction input() {
+		// currently for textline input, will implement keylistener to directly
+		// send enum
+		String input = "";
+		input = s.nextLine();
+		try {
+			return Direction.valueOf(input);
+		} catch (IllegalArgumentException e) {
+			System.out.println("Shit's done gone fucked up.");
+			return Direction.NONE;
+		}
+
+	}
+
+	public void display() {
+		for (int j = 0; j < 20; j++) {
+			String line = "|";
+			for (int i = 0; i < 10; i++) {
+				if (grid[i][j] == null)
+					line += "X";
+				else if (grid[i][j].owner == Owner.BLANK)
+					line += " ";
+				else if (grid[i][j].owner == Owner.GAME)
+					line += "O";
+				else if (grid[i][j].owner == Owner.P1)
+					line += "@";
+				else if (grid[i][j].owner == Owner.P2)
+					line += "X";
+
+			}
+			line += "|";
+
+			System.out.println(line);
+		}
+		System.out.println("-------------");
+		System.out.println();
+
+		for (int j = 0; j < 20; j++) {
+			for (int i = 0; i < 10; i++) {
+				if (grid[i][j].owner == Owner.BLANK)
+					squares[i][j].setBackground(java.awt.Color.WHITE);
+				else if (grid[i][j].owner == Owner.GAME)
+					squares[i][j].setBackground(java.awt.Color.DARK_GRAYs);
+				else if (grid[i][j].owner == Owner.P1)
+					squares[i][j].setBackground(java.awt.Color.BLUE);
+				else if (grid[i][j].owner == Owner.P2)
+					squares[i][j].setBackground(java.awt.Color.RED);
+
+			}
+		}
+		// board.setBackground(java.awt.Color.GREEN);
+	}
+
+}

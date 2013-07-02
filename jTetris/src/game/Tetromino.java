@@ -2,7 +2,6 @@ package game;
 
 import game.Board.Owner;
 import game.Board.Shape;
-import game.Main.Direction;
 
 public class Tetromino {
 	public Tile[] tiles=new Tile[4];
