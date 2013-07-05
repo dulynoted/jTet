@@ -27,15 +27,13 @@ public class GameInterface {
 		frame.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 		// frame.setSize(800, 600);
 
-		// frame.setResizable(false);
+		frame.setResizable(false);
 		frame.add(board);
 		frame.add(info);
 		frame.setTitle("Tetris");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		board.setBackground(java.awt.Color.WHITE);
-		// board.setSize(new Dimension(260, 520));
-		// info.setLocation(261, 0);
-		// info.setSize(new Dimension(150, 520));
+	
 		info.setBackground(java.awt.Color.DARK_GRAY);
 		board.setLayout(null);
 		board.setBackground(java.awt.Color.GRAY);

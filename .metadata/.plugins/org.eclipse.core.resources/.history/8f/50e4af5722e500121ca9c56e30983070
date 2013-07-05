@@ -5,6 +5,8 @@ import game.Main.Direction;
 public class Board {
 	private Tetromino cTetromino;
 	private Shape nextTetromino;
+	//I'm really disappointed I couldn't think of a better way to do this
+	private boolean swapCheck=false;
 	private Tile[][] grid = new Tile[10][20];
 
 	public Board(boolean GameOn, boolean Unstacked) {
@@ -21,8 +23,8 @@ public class Board {
 		SQUARE, LINE, T, LS, RS, LL, RL;
 		// wooo stack overflow and java's stupid enumerators
 		public static Shape random() {
-			return SQUARE;
-			//return values()[(int) (Math.random() * values().length)];
+			//return SQUARE;
+			return values()[(int) (Math.random() * values().length)];
 		}
 	}
 
@@ -86,15 +88,18 @@ public class Board {
 		case CW:
 			if (cTetromino.shape == Shape.SQUARE)
 				break;
-			rotate(-1, 1);
+			rotate(1, -1);
+			swapCheck=false;
+
 			break;
 		case CCW:
 			if (cTetromino.shape == Shape.SQUARE)
 				break;
-			rotate(1, -1);
+			rotate(-1, 1);
+			swapCheck=false;
 			break;
 		case NONE:
-			// Oh Dhanny bhoy, the piiiiiipes, the piiiiipes are callin'...
+			// Oh Danny boy, the piiiiiipes, the piiiiipes are callin'...
 			break;
 
 		}
@@ -129,15 +134,19 @@ public class Board {
 				t.y = yOrigin + i * xRotate;
 			}
 		}
+		else if(cTetromino.shape==Shape.LINE||cTetromino.shape==Shape.RS||cTetromino.shape==Shape.LS){
+			swapCheck=true;
+			rotate(-1*i,-1*j);
+		}
+			
+			
 	}
 
 	private void stopTetromino() {
 		for (Tile t : cTetromino.tiles)
 			grid[t.x][t.y].owner=Owner.GAME;
+				System.out.println("HYYYAAAAALAlalalaala");
 			
-			System.out.println("HYYYAAAAALAlalalaala");
-			
-		// t=null;
 	}
 
 	public boolean movecheck(int x, int y) {
@@ -164,15 +173,16 @@ public class Board {
 			}
 			if (full) {
 				for (int i = 0; i < 10; i++) {
-					grid[i][j].owner = Owner.BLANK;
+					grid[i][j].owner = Owner.P2;
 				}
-				for (int k = j; k < 20; k++) {
+		for (int k = j; k >=0; k--) {
 					for (int i = 0; i < 10; i++) {
-						if (k == 19)
+						if (k == 0)
 							grid[i][j].owner = Owner.BLANK;
 						else {
 							grid[i][j] = grid[i][j - 1];
-							grid[i][j].y += 1;
+							//grid[i][j].y += 1;
+							grid[i][j].owner=grid[i][j - 1].owner;
 						}
 					}
 				}

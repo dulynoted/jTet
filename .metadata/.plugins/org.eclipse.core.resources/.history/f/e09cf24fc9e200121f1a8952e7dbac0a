@@ -56,10 +56,9 @@ public class Main {
 
 	public void cycle() {
 		System.out.println("Cycling");
-		
-		clines+=b.clear();
-		 timer.setDelay(1000 - (clines / 10) * 50);
 
+		 timer.setDelay(1000 - (clines / 10) * 50);
+		b.clear();
 		gameOn = b.endcheck();
 		if (gameOn)
 			b.spawn();

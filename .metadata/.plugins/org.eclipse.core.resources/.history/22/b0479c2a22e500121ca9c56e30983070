@@ -21,6 +21,7 @@ public class Board {
 		SQUARE, LINE, T, LS, RS, LL, RL;
 		// wooo stack overflow and java's stupid enumerators
 		public static Shape random() {
+			//return SQUARE;
 			return values()[(int) (Math.random() * values().length)];
 		}
 	}
@@ -85,15 +86,17 @@ public class Board {
 		case CW:
 			if (cTetromino.shape == Shape.SQUARE)
 				break;
-			rotate(-1, 1);
+			rotate(1, -1);
+
 			break;
 		case CCW:
 			if (cTetromino.shape == Shape.SQUARE)
 				break;
-			rotate(1, -1);
+			rotate(-1, 1);
+
 			break;
 		case NONE:
-			// Oh Dhanny bhoy, the piiiiiipes, the piiiiipes are callin'...
+			// Oh Danny boy, the piiiiiipes, the piiiiipes are callin'...
 			break;
 
 		}
@@ -132,11 +135,9 @@ public class Board {
 
 	private void stopTetromino() {
 		for (Tile t : cTetromino.tiles)
-			t.owner=Owner.GAME;
+			grid[t.x][t.y].owner=Owner.GAME;
+				System.out.println("HYYYAAAAALAlalalaala");
 			
-			System.out.println("HYYYAAAAALAlalalaala");
-			
-		// t=null;
 	}
 
 	public boolean movecheck(int x, int y) {
@@ -163,15 +164,16 @@ public class Board {
 			}
 			if (full) {
 				for (int i = 0; i < 10; i++) {
-					grid[i][j].owner = Owner.BLANK;
+					grid[i][j].owner = Owner.P2;
 				}
-				for (int k = j; k < 20; k++) {
+		for (int k = j; k >=0; k--) {
 					for (int i = 0; i < 10; i++) {
-						if (k == 19)
+						if (k == 0)
 							grid[i][j].owner = Owner.BLANK;
 						else {
 							grid[i][j] = grid[i][j - 1];
-							grid[i][j].y += 1;
+							//grid[i][j].y += 1;
+							grid[i][j].owner=grid[i][j - 1].owner;
 						}
 					}
 				}
