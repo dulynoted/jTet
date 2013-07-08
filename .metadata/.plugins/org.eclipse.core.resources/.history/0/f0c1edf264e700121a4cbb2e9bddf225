@@ -33,7 +33,10 @@ public class Main {
 
 	}
 	
-	
+	//@SuppressWarnings("unused")
+	private void restart(){
+		b=new Board(gameOn, unstacked);
+	}
 	private void endgame() {
 		System.out.println("YOU LOSE");
 		timer.stop();
@@ -44,19 +47,6 @@ public class Main {
 	}
 	
 	
-	public void reset(){
-		endgame();
-		clines=0;
-		gameOn=true; 
-		unstacked=true;
-		b=new Board(gameOn, unstacked);
-		gi.update(b);
-
-		timer.start();
-		cycle();
-		
-		System.out.println("blehrgds");
-	}
 	
 	public void cycle() {
 		System.out.println("Cycling");

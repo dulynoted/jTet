@@ -54,7 +54,6 @@ public class GameInterface {
 			public void actionPerformed(ActionEvent e) {
 				main.reset();
 				grid=b.showBoard();
-				display();
 			}
 		});
 

@@ -51,6 +51,7 @@ public class Main {
 		unstacked=true;
 		b=new Board(gameOn, unstacked);
 		gi.update(b);
+		gi.display();
 
 		timer.start();
 		cycle();

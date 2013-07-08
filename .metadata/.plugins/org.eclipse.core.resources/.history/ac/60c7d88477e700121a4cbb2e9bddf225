@@ -51,10 +51,7 @@ public class Main {
 		unstacked=true;
 		b=new Board(gameOn, unstacked);
 		gi.update(b);
-
-		timer.start();
-		cycle();
-		
+		gi.display();
 		System.out.println("blehrgds");
 	}
 	

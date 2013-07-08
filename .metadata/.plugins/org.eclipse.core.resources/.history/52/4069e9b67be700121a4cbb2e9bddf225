@@ -23,9 +23,9 @@ public class GameInterface {
 	private JPanel[][] squares = new JPanel[10][20];
 	private JLabel gameInfo = new JLabel();
 
-	public GameInterface(Board b1, Main MAIN) {
+	public GameInterface(Board b, Main MAIN) {
 		main = MAIN;
-		b = b1;
+		this.b = b;
 		grid = b.showBoard();
 		frame.setVisible(true);
 		frame.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
@@ -53,8 +53,6 @@ public class GameInterface {
 		restart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				main.reset();
-				grid=b.showBoard();
-				display();
 			}
 		});
 

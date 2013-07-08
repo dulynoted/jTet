@@ -4,13 +4,13 @@ import java.awt.event.*;
 import javax.swing.Timer;
 
 public class Main {
-	public int clines = 0;
+	private int clines = 0;
 	private Timer timer;
 	private boolean gameOn = true;
 	private boolean unstacked = true;
 
 	private Board b = new Board(gameOn, unstacked);
-	private GameInterface gi = new GameInterface(b, this);
+	private GameInterface gi = new GameInterface(b);
 
 	public Main() {
 		timer = new Timer(1000, new ActionListener() {
@@ -22,7 +22,13 @@ public class Main {
 				gi.display();
 			};
 		});
-				
+		/*
+		 * timer=new Timer(); timer.schedule(new TimerTask(){
+		 * 
+		 * @Override public void run() { System.out.println("LOOK DOWN");
+		 * //unstacked=b.move(gi.input()); unstacked = b.move(Direction.DOWN);
+		 * if(!unstacked) cycle(); gi.display(); }}, 1000,1000-10*clines);
+		 */
 
 		cycle();
 		gi.display();
@@ -32,37 +38,23 @@ public class Main {
 		unstacked = true;
 
 	}
-	
-	
+
 	private void endgame() {
 		System.out.println("YOU LOSE");
+		// timer.cancel();
 		timer.stop();
+
 	}
 
 	public enum Direction {
 		UP, DOWN, LEFT, RIGHT, CW, CCW, NONE
 	}
-	
-	
-	public void reset(){
-		endgame();
-		clines=0;
-		gameOn=true; 
-		unstacked=true;
-		b=new Board(gameOn, unstacked);
-		gi.update(b);
 
-		timer.start();
-		cycle();
-		
-		System.out.println("blehrgds");
-	}
-	
 	public void cycle() {
 		System.out.println("Cycling");
 		
 		clines+=b.clear();
-		timer.setDelay(1000 - (clines / 10) * 50);
+		 timer.setDelay(1000 - (clines / 10) * 100);
 
 		gameOn = b.endcheck();
 		if (gameOn)
