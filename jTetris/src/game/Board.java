@@ -7,7 +7,7 @@ public class Board {
 	private Shape nextTetromino;
 	private Tile[][] grid = new Tile[10][20];
 
-	public Board(boolean GameOn, boolean Unstacked) {
+	public Board(boolean GameOn, boolean Unstacked, int version) {
 		for (int j = 0; j < 20; j++) {
 			for (int i = 0; i < 10; i++) {
 				grid[i][j] = new Tile(Owner.BLANK, i, j);
@@ -33,13 +33,13 @@ public class Board {
 		return grid;
 	}
 
-	public void spawn() {
+	public void spawn(int player) {
 		cTetromino = new Tetromino(grid, nextTetromino, Owner.P1);
 		nextTetromino = Shape.random();
 		System.out.println(cTetromino.shape.toString());
 	}
 
-	public boolean move(Direction d) {
+	public boolean move(int i, Direction d) {
 		switch (d) {
 		case UP:
 			// displays next tile somewhere
@@ -160,7 +160,7 @@ public class Board {
 
 	}
 
-	public int clear() {
+	public int clear(int player) {
 		int lines=0;
 		for (int j = 0; j < 20; j++) {
 			boolean full = true;

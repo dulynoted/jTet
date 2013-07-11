@@ -103,19 +103,19 @@ public class GameInterface {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			if (direction == "down")
-				b.move(Direction.DOWN);
+				b.move(0, Direction.DOWN);
 			else if (direction == "left")
-				b.move(Direction.LEFT);
+				b.move(0, Direction.LEFT);
 			else if (direction == "right")
-				b.move(Direction.RIGHT);
+				b.move(0, Direction.RIGHT);
 			else if (direction == "up")
-				b.move(Direction.UP);
+				b.move(0, Direction.UP);
 			else if (direction == "cw")
-				b.move(Direction.CW);
+				b.move(0, Direction.CW);
 			else if (direction == "ccw")
-				b.move(Direction.CCW);
+				b.move(0, Direction.CCW);
 			else
-				b.move(Direction.NONE);
+				b.move(0, Direction.NONE);
 
 			display();
 		}
