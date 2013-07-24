@@ -11,9 +11,10 @@ public class btTetromino {
 	public btTetromino(btTile[][] grid, Shape shape, Owner p) {
 		owner=p;
 		x=4;
-		y=Owner.P1==p ? 0: 40;
+		y=Owner.P1==p ? 0: 39;
 		int i=Owner.P1==p ? 1:-1;
 		this.shape=shape;
+		System.out.println("SHAPE: "+ shape.toString());
 		switch(shape){
 		case SQUARE:
 			tiles[0]=new btTile(p, x+0, y+0*i);
